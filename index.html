@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Let's Play Valorant!!</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Rubik+Doodle+Shadow&display=swap');
+
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+            overflow: hidden; /* Hide overflow to prevent scroll bars */
+            background-color: #ffdae9; /* Cherry-themed background color */
+        }
+
+        h1 {
+            margin-bottom: 20px;
+            margin-top: -20px;
+            color: #8d001e; /* Dark red cherry color for the title */
+            font-family: 'Rubik Doodle Shadow', sans-serif; /* Use the specified font for the title */
+            font-weight: 700; /* Use bold font weight */
+            font-size: 35px; /* Increased title size by 5 pixels */
+        }
+
+        button {
+            width: 150px;
+            height: 40px;
+            margin: 10px;
+            background-color: #ff5978; /* Modern cherry button color */
+            border: none;
+            color: #fff; /* White text color */
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s ease; /* Smooth transition on hover */
+        }
+
+        button:hover {
+            background-color: #c9324a; /* Darker cherry color on hover */
+        }
+
+        #noButton {
+            position: absolute;
+        }
+
+        .nerd-container {
+            text-align: center;
+            color: #8d001e; /* Dark red cherry color for the text */
+        }
+
+        .nerd-emoji {
+            font-family: 'Rubik Doodle Shadow', sans-serif; /* Use the specified font for the emoji */
+            font-size: 2em;
+            opacity: 0; /* Initially hide the emoji */
+            animation: zoomIn 1s forwards; /* Use keyframes for zoom-in animation */
+            display: none; /* Hide the emoji by default */
+        }
+
+        .you-text {
+            font-family: 'Rubik Doodle Shadow', sans-serif; /* Use the specified font for the text */
+            font-size: 1.5em;
+            opacity: 0; /* Initially hide the text */
+            margin-top: 60px;
+        }
+
+        @keyframes zoomIn {
+            from {
+                opacity: 0;
+                transform: scale(0);
+            }
+            to {
+                opacity: 1;
+                transform: scale(5);
+            }
+        }
+    </style>
+</head>
+<body>
+    <h1>Let's Play Valorant!!</h1>
+    <button onclick="onYesClick()">Yes</button>
+    <button id="noButton" onmouseover="onNoHover()">No</button>
+    <div class="nerd-container">
+        <div class="nerd-emoji">🤓
+            you.
+        </div> <!-- Nerd emoji -->
+        <div class="you-text">You</div>
+    </div>
+
+    <script>
+        function onYesClick() {
+            // Clear the content of the body
+            document.body.innerHTML = '<div class="nerd-container"><div class="nerd-emoji">🤓 you. </div><div class="you-text">You</div></div>';
+            var nerdContainer = document.querySelector(".nerd-container");
+            var nerdEmoji = document.querySelector(".nerd-emoji");
+            var youText = document.querySelector(".you-text");
+
+            nerdContainer.style.display = "block"; // Display the container after clearing the body
+            nerdEmoji.style.display = "block"; // Display the emoji after clearing the body
+            youText.style.display = "block"; // Display the text after clearing the body
+        }
+
+        function onNoHover() {
+            var noButton = document.getElementById("noButton");
+            var x = Math.floor(Math.random() * (window.innerWidth - noButton.offsetWidth));
+            var y = Math.floor(Math.random() * (window.innerHeight - noButton.offsetHeight));
+
+            // Ensure the "No" button doesn't overlap with the "Yes" button
+            x = Math.min(x, window.innerWidth - noButton.offsetWidth - document.querySelector('button').offsetWidth);
+            y = Math.min(y, window.innerHeight - noButton.offsetHeight);
+
+            noButton.style.left = x + "px";
+            noButton.style.top = y + "px";
+        }
+    </script>
+</body>
+</html>
