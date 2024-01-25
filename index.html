@@ -3,117 +3,176 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Let's Play Valorant!!</title>
+    <title>Kuromi</title>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Rubik+Doodle+Shadow&display=swap');
+        @font-face {
+            font-family: 'Cheri';
+            src: local('Cheri'), url('CHERI___.TTF') format('truetype');
+            font-weight: normal;
+            font-style: normal;
+            font-size: 20px;
+        }
+
+        :root {
+            --darkbg: #251D29;
+            --darkt: #FFD1F7;
+            --lightbg: #fff;
+            --lightt: #D43370;
+
+            --toggleHeight: 16em;
+            --toggleWidth: 30em;
+            --toggleBtnRadius: 10em;
+
+            --bgColor--night: #423966;
+            --toggleBtn-bgColor--night: var(--bgColor--night);
+            --mooncolor: #D9FBFF;
+            --bgColor--day: #9ee3fb;
+            --toggleBtn-bgColor--day: var(--bgColor--day);
+        }
 
         body {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            height: 100vh;
+            transition: all .2s ease-in-out;
+            background: url('image.gif') center/cover fixed; /* Set the background image */
+            color: var(--darkt);
+            text-align: center;
+            position: relative;
+            height: 100vh; /* Adjusted for full viewport height */
             margin: 0;
-            overflow: hidden; /* Hide overflow to prevent scroll bars */
-            background-color: #ffdae9; /* Cherry-themed background color */
+            overflow: hidden; /* Prevent scrolling */
+            font-family: 'Cheri', sans-serif; /* Use the custom font */
+            cursor: url('cursor.cur'), auto; /* Set custom cursor */
+        }
+
+        .light {
+            background: var(--lightbg);
+            color: var(--lightt);
+        }
+
+        .tdnn {
+            margin: 0 auto;
+            font-size: 7px;
+            margin-top: 10em;
+            position: relative;
+            height: var(--toggleHeight);
+            width: var(--toggleWidth);
+            border-radius: var(--toggleHeight);
+            transition: all 500ms ease-in-out;
+            background: var(--bgColor--night);
+        }
+
+        .day {
+            background: #FFBF71;
+        }
+
+        .moon {
+            position: absolute;
+            display: block;
+            border-radius: 50%;
+            transition: all 400ms ease-in-out;
+            top: 3em;
+            left: 3em;
+            transform: rotate(-75deg);
+            width: var(--toggleBtnRadius);
+            height: var(--toggleBtnRadius);
+            background: var(--bgColor--night);
+            box-shadow:
+                3em 2.5em 0 0em var(--mooncolor) inset,
+                rgba(255, 255, 255, 0.1) 0em -7em 0 -4.5em,
+                rgba(255, 255, 255, 0.1) 3em 7em 0 -4.5em,
+                rgba(255, 255, 255, 0.1) 2em 13em 0 -4em,
+                rgba(255, 255, 255, 0.1) 6em 2em 0 -4.1em,
+                rgba(255, 255, 255, 0.1) 8em 8em 0 -4.5em,
+                rgba(255, 255, 255, 0.1) 6em 13em 0 -4.5em,
+                rgba(255, 255, 255, 0.1) -4em 7em 0 -4.5em,
+                rgba(255, 255, 255, 0.1) -1em 10em 0 -4.5em;
+        }
+
+        .sun {
+            top: 4.5em;
+            left: 18em;
+            transform: rotate(0deg);
+            width: 7em;
+            height: 7em;
+            background: #fff;
+            box-shadow: 3em 3em 0 5em #fff inset,
+                0 -5em 0 -2.7em #fff,
+                3.5em -3.5em 0 -3em #fff,
+                5em 0 0 -2.7em #fff,
+                3.5em 3.5em 0 -3em #fff,
+                0 5em 0 -2.7em #fff,
+                -3.5em 3.5em 0 -3em #fff,
+                -5em 0 0 -2.7em #fff,
+                -3.5em -3.5em 0 -3em #fff;
         }
 
         h1 {
-            margin-bottom: 20px;
-            margin-top: -20px;
-            color: #8d001e; /* Dark red cherry color for the title */
-            font-family: 'Rubik Doodle Shadow', sans-serif; /* Use the specified font for the title */
-            font-weight: 700; /* Use bold font weight */
-            font-size: 35px; /* Increased title size by 5 pixels */
+            margin-top: 50px; /* Adjusted margin */
+            font-size: 110px; /* Increased the header size by 10px */
         }
 
-        button {
-            width: 150px;
-            height: 40px;
-            margin: 10px;
-            background-color: #ff5978; /* Modern cherry button color */
-            border: none;
-            color: #fff; /* White text color */
+        #counter {
+            margin-top: 20px;
+            font-size: 50px;
+            color: #dd1382; /* Set press count color */
+        }
+
+        #playSoundButton {
+            margin-top: 10px;
+            padding: 10px;
             font-size: 16px;
+            background-color: #221D24;
+            color: #fff;
+            border: none;
             cursor: pointer;
-            transition: background-color 0.3s ease; /* Smooth transition on hover */
-        }
-
-        button:hover {
-            background-color: #c9324a; /* Darker cherry color on hover */
-        }
-
-        #noButton {
-            position: absolute;
-        }
-
-        .nerd-container {
-            text-align: center;
-            color: #8d001e; /* Dark red cherry color for the text */
-        }
-
-        .nerd-emoji {
-            font-family: 'Rubik Doodle Shadow', sans-serif; /* Use the specified font for the emoji */
-            font-size: 2em;
-            opacity: 0; /* Initially hide the emoji */
-            animation: zoomIn 1s forwards; /* Use keyframes for zoom-in animation */
-            display: none; /* Hide the emoji by default */
-        }
-
-        .you-text {
-            font-family: 'Rubik Doodle Shadow', sans-serif; /* Use the specified font for the text */
-            font-size: 1.5em;
-            opacity: 0; /* Initially hide the text */
-            margin-top: 60px;
-        }
-
-        @keyframes zoomIn {
-            from {
-                opacity: 0;
-                transform: scale(0);
-            }
-            to {
-                opacity: 1;
-                transform: scale(5);
-            }
+            border-radius: 100px;
+            
         }
     </style>
 </head>
 <body>
-    <h1>Let's Play Valorant!!</h1>
-    <button onclick="onYesClick()">Yes</button>
-    <button id="noButton" onmouseover="onNoHover()">No</button>
-    <div class="nerd-container">
-        <div class="nerd-emoji">🤓
-            you.
-        </div> <!-- Nerd emoji -->
-        <div class="you-text">You</div>
+    <h1>Kuromi</h1>
+    <div class="tdnn" onclick="toggleDayNight()">
+        <div class="moon"></div>
     </div>
+    <div id="counter">Kuromi Counter: 0</div>
+    <button id="playSoundButton" onclick="playSound()">KURURUR</button>
 
     <script>
-        function onYesClick() {
-            // Clear the content of the body
-            document.body.innerHTML = '<div class="nerd-container"><div class="nerd-emoji">🤓 you. </div><div class="you-text">You</div></div>';
-            var nerdContainer = document.querySelector(".nerd-container");
-            var nerdEmoji = document.querySelector(".nerd-emoji");
-            var youText = document.querySelector(".you-text");
+        let backgroundToggle = false;
+        let pressCount = 0;
 
-            nerdContainer.style.display = "block"; // Display the container after clearing the body
-            nerdEmoji.style.display = "block"; // Display the emoji after clearing the body
-            youText.style.display = "block"; // Display the text after clearing the body
+        function toggleDayNight() {
+            const body = document.body;
+            const moon = document.querySelector('.moon');
+            const tdnn = document.querySelector('.tdnn');
+
+            body.classList.toggle('light');
+            moon.classList.toggle('sun');
+            tdnn.classList.toggle('day');
+
+            // Toggle background image on button press
+            backgroundToggle = !backgroundToggle;
+            const newBackground = backgroundToggle ? 'url("image2.gif") center/cover fixed' : 'url("image.gif") center/cover fixed';
+            body.style.background = newBackground;
+
+            // Update press count
+            pressCount++;
+            document.getElementById('counter').innerText = 'Kuromi Counter: ' + pressCount;
         }
 
-        function onNoHover() {
-            var noButton = document.getElementById("noButton");
-            var x = Math.floor(Math.random() * (window.innerWidth - noButton.offsetWidth));
-            var y = Math.floor(Math.random() * (window.innerHeight - noButton.offsetHeight));
+        function playSound() {
+            const randomProbability = Math.random(); // Generate a random number between 0 and 1
 
-            // Ensure the "No" button doesn't overlap with the "Yes" button
-            x = Math.min(x, window.innerWidth - noButton.offsetWidth - document.querySelector('button').offsetWidth);
-            y = Math.min(y, window.innerHeight - noButton.offsetHeight);
-
-            noButton.style.left = x + "px";
-            noButton.style.top = y + "px";
+            if (randomProbability <= 0.2) {
+                // 20% chance to play nigg1.mp3
+                const audio = new Audio('nigg1.mp3');
+                audio.play();
+            } else {
+                // 80% chance to play nigg.mp3
+                const audio = new Audio('nigg.mp3');
+                audio.play();
+                
+            }
         }
     </script>
 </body>
